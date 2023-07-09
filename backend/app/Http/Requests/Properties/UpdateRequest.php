@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Bookings;
+namespace App\Http\Requests\Properties;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return !is_null($this->property?->id);
     }
 
     /**
@@ -22,10 +22,10 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
-            'status_id' => 'required|exists:statuses,id',
-            'description' => 'nullable|string',
-            'booked_users' => 'required|integer',
+            'name' => 'required|string',
+            'img' => 'string',
+            'description' => 'string',
+            'price' => 'float',
         ];
     }
 }

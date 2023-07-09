@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\PropertyController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -27,6 +28,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.'], function() {
         //Booking
         Route::post('booking/list', [BookingController::class, 'index'])->name('booking.index');
         Route::apiResource('booking', BookingController::class)->except('index');
+
+        //Properites
+        Route::post('properties/list', [PropertyController::class, 'index'])->name('property.index');
+        Route::apiResource('properties', PropertyController::class)->except('index');
 
         // Status
         Route::post('status/list', [StatusController::class, 'index'])->name('status.index');

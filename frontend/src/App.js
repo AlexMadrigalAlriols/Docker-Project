@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Home from './components/Home/Home.js'
+import Login from './components/Users/Login.js';
+import NavBar from './components/Partials/Navbar.js';
+import Protected from './services/AuthService.js';
+import { Routes, Route } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css"
 
 function App() {
+  const isLoggedIn = localStorage.getItem('token') && localStorage.getItem('user_id');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar />
+
+      <Routes>
+          <Route index
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <Home />
+              </Protected>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
   );
 }
 

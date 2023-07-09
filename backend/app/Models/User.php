@@ -43,6 +43,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Get the bookings of the user
+     *
+     * @return \Illuminate\Commercialbase\Eloquent\Relations\BelongsTo
+     */
     public function bookings(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Booking::class);

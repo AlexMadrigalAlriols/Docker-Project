@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Status>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Property>
  */
-class StatusFactory extends Factory
+class PropertyFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +18,9 @@ class StatusFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'color' => fake()->safeHexColor(),
-            'text-color' => fake()->safeHexColor()
+            'description' => fake()->sentence(),
+            'img' => fake()->imageUrl(),
+            'price' => fake()->numberBetween(50, 200)
         ];
     }
 }

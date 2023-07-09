@@ -15,6 +15,7 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'status_id',
+        'property_id',
         'description',
         'booked_users',
     ];
@@ -43,5 +44,15 @@ class Booking extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the property of the booking
+     *
+     * @return \Illuminate\Commercialbase\Eloquent\Relations\BelongsTo
+     */
+    public function property(): BelongsTo
+    {
+        return $this->belongsTo(Property::class);
     }
 }
