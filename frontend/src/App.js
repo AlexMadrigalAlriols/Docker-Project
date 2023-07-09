@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Home from './components/Home/Home.js'
+import UserBookings from './components/UserBookings/UserBookings.js'
 import Login from './components/Users/Login.js';
 import NavBar from './components/Partials/Navbar.js';
 import Protected from './services/AuthService.js';
@@ -18,6 +19,13 @@ function App() {
             element={
               <Protected isLoggedIn={isLoggedIn}>
                 <Home />
+              </Protected>
+            }
+          />
+          <Route path="/bookings"
+            element={
+              <Protected isLoggedIn={isLoggedIn}>
+                <UserBookings />
               </Protected>
             }
           />

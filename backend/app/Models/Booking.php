@@ -26,6 +26,11 @@ class Booking extends Model
         'deleted_at'
     ];
 
+    protected $with = [
+        'property',
+        'status'
+    ];
+
     /**
      * Get the status of the booking
      *

@@ -1,67 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import BookingService from "../../services/BookingService.js";
+import PropertyService from "../../services/PropertyService.js";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDollarSign  } from '@fortawesome/free-solid-svg-icons';
+import "./Home.css";
 
 export default function Home() {
-  const [countryItems, initCountry] = useState([]);
+  const [properties, initProperties] = useState([]);
 
   const fetchData = async () => {
-    return await BookingService.list();
+    return await PropertyService.list();
   }
 
   useEffect(() => {
     fetchData()
       .then((res) => {
         if(res) {
-          console.log(res);
+          initProperties(res.data)
         }
       })
       .catch((e) => {
         console.log(e.message)
       })
   }, [])
+
   return (
-    <div className="row">
-      <h2 className="mb-3">React HTTP Reqeust with Async Await Example</h2>
-      {countryItems.map((item, idx) => {
-        return (
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3" key={idx}>
-            <div className="card h-100">
-              <div className="img-block">
-                <img
-                  src={item.flags.svg}
-                  className="card-img-top"
-                  alt={item.name.common}
-                />
-              </div>
-              <div className="card-body">
-                <h5 className="card-title">{item.name.common}</h5>
-              </div>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">
-                  <strong>Capital:</strong> {item.capital}
-                </li>
-                <li className="list-group-item">
-                  <strong>Population:</strong> {item.population}
-                </li>
-                <li className="list-group-item">
-                  <strong>Continent:</strong> {item.continents[0]}
-                </li>
-              </ul>
-              <div className="card-body">
-                <div className="d-grid">
-                  <a
-                    className="btn btn-dark"
-                    href="{item.maps.googleMaps}"
-                    target="_blank"
-                  >
-                    View Map
-                  </a>
+    <div className="container">
+      <div className="row">
+        <h1 className="mb-3 mt-4">Properties List</h1>
+        {properties.map((item, idx) => {
+          return (
+            <div className="col-lg-3 col-md-4 col-sm-6 mb-3" key={idx}>
+              <div className="card">
+                <img className="card-img-top" height={125} src={item.img} alt="Card image cap"/>
+                <div className='card-body'>
+                  <h5>{item.name}</h5>
+                  <p className='text-muted'>{item.description}</p>
+                  <p>Price: <span className='h3'>{item.price} €</span></p>
+                </div>
+
+                <div className='card-footer'>
+                  <button className='btn btn-primary w-100 align-bottom'><FontAwesomeIcon icon={faDollarSign} /> Book</button>
                 </div>
               </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </div>
   );
 }

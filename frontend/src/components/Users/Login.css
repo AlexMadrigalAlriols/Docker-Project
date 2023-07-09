@@ -1,6 +1,6 @@
 body {
     min-height: 100vh;
-    background-image: url('../../../public/img/background.jpeg') !important;
+    background-image: url('../../../public/img/background.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
 }

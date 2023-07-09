@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import $ from 'jquery';
 import UserService from "../../services/UserService.js";
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,10 @@ export default function Login() {
     const sendForm = async (body) => {
         return await UserService.login(body);
     }
+
+    const isLoggedIn = async () => {
+        return await localStorage.getItem('token');
+      }
 
     const handleSubmit = async (e) => {
         //Prevent page reload
@@ -31,6 +35,18 @@ export default function Login() {
             }
         });
     };
+
+    useEffect(() => {
+        isLoggedIn()
+        .then((res) => {
+            if(res) {
+                navigate('/');
+            }
+        })
+        .catch((e) => {
+            console.log(e.message)
+        })
+    }, [])
 
     return (
         <div class="background">

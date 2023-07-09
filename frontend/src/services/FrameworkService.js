@@ -11,7 +11,7 @@ const config = {
 const FrameworkService = {
     get: async function(url, auth = true) {
         if(auth) {
-            config.headers['Authorization'] = 'Bearer 1|kSCT8ehctbSEn9yY8mH6M2P4eAxR1uFT8KlxUpad'
+            config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token');
         }
 
         return await axios.get(host + url, config)
@@ -25,10 +25,23 @@ const FrameworkService = {
 
     post: async function(url, body = [], auth = true) {
         if(auth) {
-            config.headers['Authorization'] = 'Bearer 1|kSCT8ehctbSEn9yY8mH6M2P4eAxR1uFT8KlxUpad'
+            config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token');
         }
 
-        return  await axios.post(host + url, body, config)
+        return await axios.post(host + url, body, config)
+        .then(function (response) {
+            return response;
+        })
+        .catch(function (e) {
+            return e;
+        });
+    },
+    delete: async function(url, auth = true) {
+        if(auth) {
+            config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+        }
+
+        return await axios.delete(host + url, config)
         .then(function (response) {
             return response;
         })

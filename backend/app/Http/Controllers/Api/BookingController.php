@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Bookings\IndexRequest;
 use App\Http\Requests\Bookings\StoreRequest;
 use App\Http\Requests\Bookings\UpdateRequest;
 use App\Http\Services\ApiResponse;
@@ -13,9 +14,15 @@ class BookingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
-        $models = Booking::get();
+        $request = $request->validated();
+
+        if(isset($request['user_id'])) {
+            $models = Booking::where('user_id', $request['user_id'])->get();
+        } else {
+            $models = Booking::get();
+        }
 
         return ApiResponse::ok("Data Found", $models);
     }

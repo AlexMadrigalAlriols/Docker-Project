@@ -1,0 +1,12 @@
+body {
+    background-color: white !important;
+    background-image: none !important;
+}
+
+.card {
+    height: 23rem !important;
+}
+
+.card-body {
+    height: 100% !important;
+}
