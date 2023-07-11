@@ -19,25 +19,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'v1', 'as' => 'api.'], function() {
+    // Login Route
     Route::post('login', [UserController::class, 'login'])->name('users.login');
 
+    // Routes protected with token
     Route::middleware('auth:sanctum')->group(function () {
         // User Logout
         Route::post('logout', [UserController::class, 'logout'])->name('users.logout');
 
-        //Booking
+        // Booking Routes
         Route::post('booking/list', [BookingController::class, 'index'])->name('booking.index');
         Route::apiResource('booking', BookingController::class)->except('index');
 
-        //Properites
+        // Properites Routes
         Route::post('properties/list', [PropertyController::class, 'index'])->name('property.index');
         Route::apiResource('properties', PropertyController::class)->except('index');
 
-        // Status
+        // Status Routes
         Route::post('status/list', [StatusController::class, 'index'])->name('status.index');
         Route::apiResource('status', StatusController::class)->except('index');
 
-        // Users
+        // Users Routes
         Route::post('users/list', [UserController::class, 'index'])->name('users.index');
         Route::apiResource('users', UserController::class)->except('index');
     });

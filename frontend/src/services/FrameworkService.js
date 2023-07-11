@@ -36,6 +36,19 @@ const FrameworkService = {
             return e;
         });
     },
+    put: async function(url, body = [], auth = true) {
+        if(auth) {
+            config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+        }
+
+        return await axios.put(host + url, body, config)
+        .then(function (response) {
+            return response;
+        })
+        .catch(function (e) {
+            return e;
+        });
+    },
     delete: async function(url, auth = true) {
         if(auth) {
             config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token');

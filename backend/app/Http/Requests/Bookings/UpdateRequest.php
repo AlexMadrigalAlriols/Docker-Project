@@ -11,7 +11,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return !is_null($this->property?->id);
+        return !is_null($this->booking?->id);
     }
 
     /**
@@ -22,10 +22,11 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'img' => 'string',
+            'booked_users' => 'integer',
             'description' => 'string',
-            'price' => 'float',
+            'property_id' => 'string',
+            'user_id' => 'string',
+            'status_id' => 'string',
         ];
     }
 }

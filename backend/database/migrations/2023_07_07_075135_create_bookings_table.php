@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('status_id')->constrained()->onDelete('cascade');
             $table->foreignId('property_id')->constrained()->onDelete('cascade');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('booked_users');
             $table->timestamps();
             $table->softDeletes();

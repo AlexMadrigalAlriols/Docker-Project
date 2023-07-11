@@ -45,6 +45,7 @@ class StatusController extends Controller
      */
     public function update(UpdateRequest $request, Status $status)
     {
+        // Fill the fields to update
         $status->fill($request->validated());
 
         if($status->save()) {

@@ -45,6 +45,7 @@ class PropertyController extends Controller
      */
     public function update(UpdateRequest $request, Property $property)
     {
+        // Fill the fields to update
         $property->fill($request->validated());
 
         if($property->save()) {

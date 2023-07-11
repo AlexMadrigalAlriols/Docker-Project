@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string',
             'img' => 'string',
             'description' => 'string',
-            'price' => 'float',
+            'price' => 'numeric',
         ];
     }
 }

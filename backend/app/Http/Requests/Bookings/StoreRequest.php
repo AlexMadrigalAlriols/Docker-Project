@@ -22,10 +22,11 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'img' => 'nullable|string',
+            'booked_users' => 'required|numeric|min:1',
             'description' => 'nullable|string',
-            'price' => 'required|float',
+            'property_id' => 'required|exists:properties,id',
+            'user_id' => 'required|exists:users,id',
+            'status_id' => 'nullable|exists:statuses,id',
         ];
     }
 }

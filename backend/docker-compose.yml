@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  server:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    networks:
+      - app-network
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - db
+
+  db:
+    tty: true
+    image: mysql:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: $DB_DATABASE
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - 3306:3306
+    networks:
+      - app-network
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  app:
+    tty: true
+    build: .
+    restart: unless-stopped
+    image: php:fpm-alpine
+    networks:
+      - app-network
+    volumes:
+      - ./:/var/www
+      - dbdata:/var/lib/mysql
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:

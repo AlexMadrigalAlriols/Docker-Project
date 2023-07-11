@@ -11,10 +11,26 @@ const BookingService = {
     },
     deleteOne: async function(booking_id) {
         return await FrameworkService.delete('/booking/' + booking_id).then((res) => {
-            return res && res.status === 200 ? true : false;
+            return res && res.status === 200 && res.data ? res.data : null;
         })
         .catch(function (e) {
-            return false;
+            return null;
+        });
+    },
+    create: async function(body) {
+        return await FrameworkService.post('/booking', body).then((res) => {
+            return (res && res.status === 200 && res.data.data ? res.data.data : null);
+        })
+        .catch(function (e) {
+            return null;
+        });
+    },
+    edit: async function(booking_id, body) {
+        return await FrameworkService.put('/booking/' + booking_id, body).then((res) => {
+            return (res && res.status === 200 && res.data ? res.data : null);
+        })
+        .catch(function (e) {
+            return null;
         });
     }
 };

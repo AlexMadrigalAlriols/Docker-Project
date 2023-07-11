@@ -18,6 +18,7 @@ class BookingController extends Controller
     {
         $request = $request->validated();
 
+        // Check if had filter user_id
         if(isset($request['user_id'])) {
             $models = Booking::where('user_id', $request['user_id'])->get();
         } else {
@@ -52,6 +53,7 @@ class BookingController extends Controller
      */
     public function update(UpdateRequest $request, Booking $booking)
     {
+        // Fill all the updated fields to model
         $booking->fill($request->validated());
 
         if($booking->save()) {

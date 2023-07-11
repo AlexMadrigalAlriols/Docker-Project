@@ -12,10 +12,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Creamos el usuario Admin
         \App\Models\User::factory()->create(
             [
                 'name' => 'Admin',
                 'email' => 'admin@admin.com'
+            ]
+        );
+
+        // Creamos otro usuario de pruebas
+        \App\Models\User::factory()->create(
+            [
+                'name' => 'Alex',
+                'email' => 'alex@barrelcloud.com'
             ]
         );
 

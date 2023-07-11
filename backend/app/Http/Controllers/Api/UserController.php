@@ -29,6 +29,9 @@ class UserController extends Controller
         return ApiResponse::ok("Data Found", $user);
     }
 
+    /**
+     * Login user and get token
+    */
     public function login(AuthRequest $request) {
         $credentials = $request->validated();
 
@@ -39,6 +42,9 @@ class UserController extends Controller
         return ApiResponse::bad("Error on login");
     }
 
+    /**
+     * Logout user and delete token
+     */
     public function logout(Request $request) {
         $request->user()->tokens()->delete();
 
