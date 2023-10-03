@@ -1,5 +1,5 @@
 # Descripcion
-Proyecto para barrel.Cloud. Gestor de reservas con laravel y REACT.
+Gestor de reservas con laravel y REACT.
 
 Puedes hacer reservas a propiedades, editarlas y cancelarlas.
 # Pasos docker a seguir:
